@@ -1,8 +1,12 @@
 cmake_minimum_required(VERSION 3.25)
 project(CMakeNuget)
 
+include(GNUInstallDirs)
+set(FOO_LIBRARY_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}")
 add_subdirectory(NativeLibrary)
-add_subdirectory(ClassLibrary)
+if(MSVC)
+  add_subdirectory(ClassLibrary)
+endif()
 
 set(CPACK_BINARY_NSIS OFF)
 set(CPACK_BINARY_NUGET ON)
