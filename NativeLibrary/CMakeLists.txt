@@ -29,6 +29,11 @@ set_property(TARGET NativeLibrary PROPERTY SOVERSION ${CMakeNuget_SOVERSION})
 
 install(
   TARGETS NativeLibrary
-  # DESTINATION ${FOO_LIBRARY_INSTALL_DIR}
   DESTINATION runtimes/win-x64/native/
-  COMPONENT libraries)
+  COMPONENT NugetLibraries
+  EXCLUDE_FROM_ALL)
+
+install(
+  TARGETS NativeLibrary
+  DESTINATION ${FOO_LIBRARY_INSTALL_DIR}
+  COMPONENT DefaultLibraries)

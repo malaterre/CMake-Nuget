@@ -8,4 +8,4 @@ set_property(TARGET ClassLibrary PROPERTY DOTNET_TARGET_FRAMEWORK "net5.0")
 install(
   TARGETS ClassLibrary
   DESTINATION lib/net5.0
-  COMPONENT libraries)
+  COMPONENT CSharpLibraries)
