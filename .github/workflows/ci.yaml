@@ -1,0 +1,19 @@
+name: CI
+on: [push, pull_request]
+jobs:
+  build:
+    strategy:
+      matrix:
+        platform: [windows-2019]
+    runs-on: ${{ matrix.platform }}
+    env:
+      CMAKE_PRESET: windows-release
+    steps:
+      - name: Checkout Current Branch
+        uses: actions/checkout@v3
+      - name: Manual CMake configure step
+        run: cmake -S . -B build
+      - name: Manual CMake restore step
+        run: cmake --build build -- -restore
+      - name: Manual CMake package step
+        run: cmake --build build --target package --config Release
