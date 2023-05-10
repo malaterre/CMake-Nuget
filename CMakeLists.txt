@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.25)
-project(CMakeNuget)
+# project is set to language C and not "NONE" to have cpack/nuget generate in right folder "win64":
+project(CMakeNuget VERSION 1.0.0 LANGUAGES C)
+
+set(CMakeNuget_SOVERSION "${CMakeNuget_VERSION_MAJOR}")
 
 include(GNUInstallDirs)
 set(FOO_LIBRARY_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}")
@@ -10,7 +13,7 @@ endif()
 
 set(CPACK_NUGET_PACKAGE_DEBUG ON)
 set(CPACK_BINARY_NSIS OFF)
-set(CPACK_BINARY_NUGET ON)
+#set(CPACK_BINARY_NUGET ON)
 set(CPACK_NUGET_PACKAGE_TAGS "native")
 #set(CPACK_NUGET_PACKAGE_DEPENDENCIES "targetFramework")
 #set(CPACK_NUGET_PACKAGE_DEPENDENCIES_targetFramework_VERSION "net5.0")
@@ -18,4 +21,5 @@ set(CPACK_PACKAGE_NAME "cmake-nuget")
 set(CPACK_PACKAGE_VERSION_MAJOR 1)
 set(CPACK_PACKAGE_VERSION_MINOR 0)
 set(CPACK_PACKAGE_VERSION_PATCH 0)
+set(CPACK_NUGET_PACKAGE_AUTHORS "malat")
 include(CPack)

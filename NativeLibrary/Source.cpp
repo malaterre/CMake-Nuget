@@ -9,5 +9,5 @@ extern "C" FOO_EXPORT void HelloWorld();
 
 void HelloWorld()
 {
-  std::cout << "Hello world from c++" << std::endl;
+  std::cout << "Hello world from c++." << std::endl;
 }
