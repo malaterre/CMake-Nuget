@@ -11,9 +11,19 @@ jobs:
     steps:
       - name: Checkout Current Branch
         uses: actions/checkout@v3
-      - name: Manual CMake configure step
-        run: cmake -S . -B build
-      - name: Manual CMake restore step
-        run: cmake --build build -- -restore
-      - name: Manual CMake package step
-        run: cmake --build build --target package --config Release
+      - name: Manual CMake configure step1
+        run: cmake -S . -B build1
+      - name: Manual CMake restore step1
+        # needed to avoid error NETSDK1004 in next step:
+        run: cmake --build build1 -- -restore
+      - name: Manual CMake build step1
+        run: cmake --build build1 --config Release
+      - name: Manual CMake install step1
+        run: cmake --install build1 --prefix ./foobar --config Release
+      - name: Manual CMake configure step2
+        run: cmake -S . -B build2 -DCPACK_BINARY_NUGET:BOOL=ON
+      - name: Manual CMake restore step2
+        # needed to avoid error NETSDK1004 in next step:
+        run: cmake --build build2 -- -restore
+      - name: Manual CMake package step2
+        run: cmake --build build2 --target package --config Release
