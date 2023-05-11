@@ -11,7 +11,7 @@ set(CMakeNuget_SOVERSION "${CMakeNuget_VERSION_MAJOR}")
 include(GNUInstallDirs)
 set(FOO_LIBRARY_INSTALL_DIR "${CMAKE_INSTALL_LIBDIR}")
 add_subdirectory(NativeLibrary)
-if(MSVC)
+if(FALSE)
   add_subdirectory(ClassLibrary)
 endif()
 
