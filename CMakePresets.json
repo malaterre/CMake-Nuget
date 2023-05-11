@@ -1,5 +1,5 @@
 {
-  "version": 3,
+  "version": 6,
   "cmakeMinimumRequired": {
     "major": 3,
     "minor": 26,
@@ -11,7 +11,14 @@
       "hidden": true,
       "binaryDir": "${sourceDir}/build/${presetName}",
       "installDir": "${sourceDir}/install/${presetName}",
-	  "generator": "Visual Studio 16 2019"
+      "generator": "Visual Studio 17 2022",
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": {
+          "type": "FILEPATH",
+          "value": "$env{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake"
+        },
+        "$VCPKG_FEATURE_FLAGS": "versions"
+      }
     },
     {
       "name": "windows-release",
@@ -19,7 +26,8 @@
       "description": "Configure with Windows release settings",
       "inherits": "base",
       "cacheVariables": {
-        "CMAKE_BUILD_TYPE": "RelWithDebInfo"
+        "CMAKE_BUILD_TYPE": "RelWithDebInfo",
+        "VCPKG_DEFAULT_TRIPLET": "x64-windows-static"
       }
     }
   ],
@@ -31,5 +39,16 @@
       "description": "Build with Windows release settings"
     }
   ],
-  "testPresets": []
+  "testPresets": [],
+  "packagePresets": [
+    {
+      "name": "windows-release",
+      "configurePreset": "windows-release",
+      "displayName": "Windows release",
+      "description": "Package with Windows release settings",
+      "generators": [
+        "NuGet"
+      ]
+    }
+  ]
 }
