@@ -11,6 +11,8 @@ jobs:
     steps:
       - name: Checkout Current Branch
         uses: actions/checkout@v3
+      - name: Manual CMake configure step3
+        run: cmake -DCMAKE_TOOLCHAIN_FILE=${env:VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake -DVCPKG_TARGET_TRIPLET=x64-windows-static -S . -B build3
       - name: Manual CMake configure step1
         run: cmake -S . -B build1
       - name: Manual CMake restore step1
