@@ -1,5 +1,6 @@
 project(PNative LANGUAGES CXX)
 
+find_package(Boost 1.53 REQUIRED COMPONENTS filesystem)
 add_library(NativeLibrary SHARED Source.cpp)
 if(WIN32)
   set(VER_FILEVERSION
@@ -22,8 +23,7 @@ if(WIN32)
                  ${CMAKE_CURRENT_BINARY_DIR}/version.rc @ONLY)
   target_sources(NativeLibrary PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/version.rc)
 endif()
-message(${CMakeNuget_VERSION})
-message(${CMakeNuget_SOVERSION})
+
 set_property(TARGET NativeLibrary PROPERTY VERSION ${CMakeNuget_VERSION})
 set_property(TARGET NativeLibrary PROPERTY SOVERSION ${CMakeNuget_SOVERSION})
 
