@@ -5,6 +5,9 @@ jobs:
     strategy:
       matrix:
         platform: [windows-2022]
+        include:
+        - platform: windows-2022
+          vcpkgCommitId: 'c9f906558f9bb12ee9811d6edc98ec9255c6cda5'
     runs-on: ${{ matrix.platform }}
     env:
       CMAKE_PRESET: windows-release
@@ -27,3 +30,15 @@ jobs:
         run: cmake --build build2 -- -restore
       - name: Manual CMake package step2
         run: cmake --build build2 --target package --config Release
+      - name: Run vcpkg
+        uses: lukka/run-vcpkg@v11
+        with:
+          vcpkgDirectory: '${{ runner.workspace }}/b/vcpkg'
+          vcpkgGitCommitId: '${{ matrix.vcpkgCommitId}}'
+      - name: Run CMake
+        uses: lukka/run-cmake@v10.5
+        with:
+          cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
+          configurePreset: '${{ env.CMAKE_PRESET }}'
+          buildPreset: '${{ env.CMAKE_PRESET }}'
+          packagePreset: '${{ env.CMAKE_PRESET }}'
